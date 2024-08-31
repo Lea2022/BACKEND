@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Edit Post{% endblock %}
+
+{% block content %}
+<h1>{% if form.instance.pk %}Edit{% else %}New{% endif %} Post</h1>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <!-- Mostrar errores generales del formulario -->
+    {{ form.non_field_errors }}
+
+    <!-- Campo de título -->
+    <div class="form-group">
+        <label for="{{ form.title.id_for_label }}">Title:</label>
+        {{ form.title }}
+        {{ form.title.errors }}
+    </div>
+
+    <!-- Campo de contenido sin label -->
+    <div class="form-group">
+        {{ form.content }}
+        {{ form.content.errors }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<a href="{% url 'post_list' %}">Back to list</a>
+{% endblock %}

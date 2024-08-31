@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Post Detail{% endblock %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+<p>{{ post.content }}</p>
+<p><em>{{ post.created_at }}</em></p>
+
+<!-- Enlaces para editar y eliminar el post si el usuario está autenticado -->
+{% if user.is_authenticated %}
+    <a href="{% url 'post_edit' post.pk %}">Edit</a>
+    <a href="{% url 'post_delete' post.pk %}">Delete</a>
+{% endif %}
+
+<a href="{% url 'post_list' %}">Back to list</a>
+{% endblock %}
